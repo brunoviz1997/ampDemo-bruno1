@@ -1,0 +1,40 @@
+//This is the lambda function in AWS file is index.js
+
+const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient({region: "us-east-2"});
+
+exports.handler = (event, context, callback) => {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+    
+    let randNum = getRandomInt(10000);
+    console.log("Processing...");
+    const params = {
+        Item: {
+            userId: randNum.toString(),
+            fName: event.key1,
+            lName: event.key2,
+            username: event.key3,
+            password: event.key4,
+            email: event.key5,
+        },
+        TableName: "reactAppTable"
+    };
+    const response = {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
+    body: JSON.stringify('Hello from new Lambda!'),
+  };
+    
+    docClient.put(params, function(err, data) {
+        if(err){
+            callback(err, null);
+        } else {
+            callback(null, data);
+        }
+    })
+};

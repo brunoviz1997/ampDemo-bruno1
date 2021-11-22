@@ -1,0 +1,9 @@
+POST https://1y0i9irqr4.execute-api.us-east-2.amazonaws.com/default/serverlessAppFunction
+
+{
+    "key1": "Jared",
+    "key2": "Hodge",
+    "key3": "jhodge5",
+    "key4": "password1234",
+    "key5": "jhodge5@email.com"
+}
